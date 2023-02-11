@@ -1,7 +1,7 @@
 import telegram
 
 # Replace with your API token
-API_TOKEN = "your_api_token_here"
+API_TOKEN = "6236847085:AAEwZFAUmX1YBk53gPa-A9zc3uOzrb2iqpg"
 
 # Create a bot instance
 bot = telegram.Bot(token=API_TOKEN)
