@@ -1,26 +1,23 @@
-import telegram
+import os
 
-# Replace with your API token
-API_TOKEN = "6236847085:AAEwZFAUmX1YBk53gPa-A9zc3uOzrb2iqpg"
+from anydlbot import AnyDLBot
 
-# Create a bot instance
-bot = telegram.Bot(token=API_TOKEN)
+bot = AnyDLBot(token=os.environ['6236847085:AAEwZFAUmX1YBk53gPa-A9zc3uOzrb2iqpg'])
 
-def handle_message(bot, update):
-    message = update.message
-    chat_id = message.chat_id
-    text = message.text
 
-    # Respond to the user's message
-    bot.send_message(chat_id=chat_id, text="Received message: " + text)
+@bot.command
+def start(update, context):
+    context.bot.send_message(chat_id=update.message.chat_id, text="Hello! How can I help you today?")
 
-# Start the bot
-updater = telegram.Updater(token=API_TOKEN)
-dispatcher = updater.dispatcher
 
-# Add a handler for incoming messages
-message_handler = telegram.MessageHandler(telegram.Filters.text, handle_message)
-dispatcher.add_handler(message_handler)
+@bot.command
+def download(update, context):
+    file_url = context.args[0]
+    file_name = context.args[1] if len(context.args) > 1 else None
 
-# Start the updater
-updater.start_polling()
+    file = bot.download(file_url, file_name)
+
+    context.bot.send_document(chat_id=update.message.chat_id, document=file)
+
+if __name__ == "__main__":
+    bot.run()
