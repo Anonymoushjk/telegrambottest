@@ -2,7 +2,7 @@ import os
 
 from anydlbot import AnyDLBot
 
-bot = AnyDLBot(token=os.environ['6236847085:AAEwZFAUmX1YBk53gPa-A9zc3uOzrb2iqpg'])
+bot = AnyDLBot(token=os.environ['TELEGRAM_TOKEN'])
 
 
 @bot.command
